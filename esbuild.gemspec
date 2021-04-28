@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.extensions = ["Rakefile"]
   spec.add_dependency "concurrent-ruby", "~> 1.1.8"
-  spec.add_development_dependency "minitest", "~> 5.14.4"
-  spec.add_development_dependency "standard", "~> 1.0.4"
+  # spec.add_development_dependency "minitest", "~> 5.14.4"
+  # spec.add_development_dependency "standard", "~> 1.0.4"
   spec.add_dependency "rake", "~> 13.0"
 end

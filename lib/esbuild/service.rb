@@ -93,7 +93,7 @@ module Esbuild
       @request_id += 1
       id = @request_id
       encoder = StdioProtocol::PacketEncoder.new
-      encoded = encoder.encode_packet(Packet.new(id, true, request))
+      encoded = String.new(encoder.encode_packet(Packet.new(id, true, request)), encoding: Encoding::UTF_8)
       @child_write.write encoded
       ivar = Concurrent::IVar.new
       @response_callbacks[id] = ivar
@@ -120,7 +120,7 @@ module Esbuild
 
     def send_response(id, response)
       encoder = StdioProtocol::PacketEncoder.new
-      encoded = encoder.encode_packet(Packet.new(id, false, response))
+      encoded = String.new(encoder.encode_packet(Packet.new(id, false, response)), encoding: Encoding::UTF_8)
       @child_write.write encoded
     end
 
@@ -250,7 +250,7 @@ module Esbuild
     end
 
     def binary_path
-      ENV["ESBUILD_BINARY_PATH"] || File.expand_path("../../bin/esbuild", __dir__)
+      ENV["ESBUILD_BINARY_PATH"] || `yarn bin esbuild`.strip
     end
   end
 
